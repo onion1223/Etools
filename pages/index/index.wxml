@@ -1,29 +1,24 @@
 <view class="container">
-  <view class="header">
-    <text class="title">工具列表</text>
-    <button class="category-btn" bindtap="toggleCategoryPopup">分类</button>
+  <view class="title-bar">
+    <text>工具列表</text>
+    <button class="category-btn" bindtap="toggleCategorySelector">分类</button>
   </view>
 
-  <view wx:if="{{showCategoryPopup}}" class="category-popup">
-    <block wx:for="{{categories}}" wx:key="index">
-      <view class="category-option" bindtap="selectCategory" data-cat="{{item}}">{{item}}</view>
-    </block>
-  </view>
-
-  <view class="tool-list">
-    <block wx:for="{{filteredTools}}" wx:key="id">
+  <view class="tools-grid">
+    <block wx:for="{{tools}}" wx:key="id">
       <view class="tool-card">
-        <image class="tool-img" src="{{item.image}}" mode="aspectFill"/>
+        <image class="tool-image" src="{{item.images[0]}}" mode="aspectFill" />
         <view class="tool-info">
-          <view class="tool-name">{{item.name}}</view>
-          <view class="tool-desc">{{item.desc}}</view>
-          <view class="tool-price">¥{{item.price.monthly}} / 月</view>
-          <view class="tool-price-sub">试用 ¥{{item.price.trial}} ・ 年付 ¥{{item.price.yearly}}</view>
+          <text class="tool-name">{{item.name}}</text>
+          <text class="tool-desc">{{item.desc}}</text>
+          <text class="tool-price">￥{{item.price.monthly}} /月</text>
+          <text class="tool-subprice">试用 {{item.price.trial}}・年付 {{item.price.yearly}}</text>
           <view class="tool-tags">
-            <block wx:for="{{item.tags}}" wx:key="*this">
+            <block wx:for="{{item.tags}}" wx:key="index">
               <text class="tool-tag">{{item}}</text>
             </block>
           </view>
+          <button class="btn">获取</button>
         </view>
       </view>
     </block>
