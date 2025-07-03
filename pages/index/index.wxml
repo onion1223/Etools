@@ -11,7 +11,7 @@
   </view>
 
   <view class="tool-list">
-    <block wx:for="{{filteredTools()}}" wx:key="id">
+    <block wx:for="{{filteredTools}}" wx:key="id">
       <view class="tool-card">
         <image class="tool-img" src="{{item.image}}" mode="aspectFill"/>
         <view class="tool-info">

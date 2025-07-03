@@ -40,7 +40,12 @@ Page({
           yearly: "299"
         }
       }
-    ]
+    ],
+    filteredTools: []
+  },
+
+  onLoad() {
+    this.updateFilteredTools();
   },
 
   toggleCategoryPopup() {
@@ -54,12 +59,18 @@ Page({
     this.setData({
       selectedCategory: cat,
       showCategoryPopup: false
+    }, () => {
+      this.updateFilteredTools();
     });
   },
 
-  filteredTools() {
+  updateFilteredTools() {
     const cat = this.data.selectedCategory;
-    if (cat === "全部") return this.data.tools;
-    return this.data.tools.filter(tool => tool.tags.includes(cat));
+    if (cat === "全部") {
+      this.setData({ filteredTools: this.data.tools });
+    } else {
+      const list = this.data.tools.filter(tool => tool.tags.includes(cat));
+      this.setData({ filteredTools: list });
+    }
   }
 })
