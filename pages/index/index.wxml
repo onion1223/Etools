@@ -1,0 +1,31 @@
+<view class="container">
+  <view class="header">
+    <text class="title">工具列表</text>
+    <button class="category-btn" bindtap="toggleCategoryPopup">分类</button>
+  </view>
+
+  <view wx:if="{{showCategoryPopup}}" class="category-popup">
+    <block wx:for="{{categories}}" wx:key="index">
+      <view class="category-option" bindtap="selectCategory" data-cat="{{item}}">{{item}}</view>
+    </block>
+  </view>
+
+  <view class="tool-list">
+    <block wx:for="{{filteredTools()}}" wx:key="id">
+      <view class="tool-card">
+        <image class="tool-img" src="{{item.image}}" mode="aspectFill"/>
+        <view class="tool-info">
+          <view class="tool-name">{{item.name}}</view>
+          <view class="tool-desc">{{item.desc}}</view>
+          <view class="tool-price">¥{{item.price.monthly}} / 月</view>
+          <view class="tool-price-sub">试用 ¥{{item.price.trial}} ・ 年付 ¥{{item.price.yearly}}</view>
+          <view class="tool-tags">
+            <block wx:for="{{item.tags}}" wx:key="*this">
+              <text class="tool-tag">{{item}}</text>
+            </block>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
